@@ -14,6 +14,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using WebAdvert.Web.ServiceClients;
 using WebAdvert.Web.Services;
+using AutoMapper;
 
 namespace WebAdvert.Web
 {
@@ -45,6 +46,7 @@ namespace WebAdvert.Web
                 options.LoginPath = "/Accounts/Login";
             });
 
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddTransient<IFileUploader, S3FileUploader>();
             services.AddHttpClient<IAdvertApiClient, AdvertApiClient>()
                 .AddPolicyHandler(GetRetryPolicy())
