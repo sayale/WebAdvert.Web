@@ -44,20 +44,22 @@ namespace WebAdvert.Web.Controllers
 
                 if (userCreated.Succeeded)
                 {
-                    RedirectToAction("Confirm");
+                    return RedirectToAction("Confirm");
                 }
 
             }
             return View();
         }
 
+        [HttpGet]
         public IActionResult Confirm()
         {
             return View(new ConfirmModel());
         }
 
         [HttpPost]
-        public async Task<IActionResult> Confirm(ConfirmModel model)
+        [ActionName("Confirm")]
+        public async Task<IActionResult> ConfirmPost(ConfirmModel model)
         {
             if (ModelState.IsValid)
             {
@@ -108,6 +110,12 @@ namespace WebAdvert.Web.Controllers
                 }
             }
             return View(model);
+        }
+
+        public async Task<IActionResult> Signout()
+        {
+            if (User.Identity.IsAuthenticated) await _signInManager.SignOutAsync();
+            return RedirectToAction("Login");
         }
     }
 }

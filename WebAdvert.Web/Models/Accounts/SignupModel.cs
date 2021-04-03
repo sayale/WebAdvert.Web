@@ -11,7 +11,7 @@ namespace WebAdvert.Web.Models.Accounts
 
         [Required]
         [DataType(DataType.Password)]
-        [StringLength(6,ErrorMessage = "Password must be at least 6 characters long")]
+        [StringLength(int.MaxValue, MinimumLength = 7, ErrorMessage = "Password must be at least 6 characters long")]
         [Display(Name = "Password")]
         public string Password { get; set; }
 
