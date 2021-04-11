@@ -36,7 +36,7 @@ namespace WebAdvert.Web.Controllers
                 var allAds = await ApiClient.GetAllAsync();
                 allViewModels = allAds.Select(x => Mapper.Map<IndexViewModel>(x));
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 allViewModels = new List<IndexViewModel>();
             }
